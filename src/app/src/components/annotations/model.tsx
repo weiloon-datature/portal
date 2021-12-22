@@ -61,7 +61,7 @@ export type FormData = {
   modelKey: string;
   projectSecret: string;
   modelURL: string;
-  modelType: "tensorflow" | "darknet" | "";
+  modelType: "tensorflow" | "darknet" | "yolotf" |"";
 };
 
 interface ModelProps {
@@ -749,6 +749,7 @@ export default class Model extends React.Component<ModelProps, ModelState> {
     const modelTypes = {
       tensorflow: "TensorFlow 2.0",
       darknet: "DarkNet (YOLO v3, YOLO v4)",
+      yolotf: "YOLO Tensorflow"
     };
 
     const registerModelForm = (
@@ -777,6 +778,16 @@ export default class Model extends React.Component<ModelProps, ModelState> {
                       onClick={() => {
                         const event = {
                           target: { name: "modelType", value: "darknet" },
+                        };
+                        this.handleChangeForm(event);
+                      }}
+                    />
+                    <Menu.Item
+                      shouldDismissPopover={false}
+                      text={modelTypes.yolotf}
+                      onClick={() => {
+                        const event = {
+                          target: { name: "modelType", value: "yolotf" },
                         };
                         this.handleChangeForm(event);
                       }}
